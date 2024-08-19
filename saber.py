@@ -12,10 +12,10 @@ st.title("Saberseminar Project Model Application")
 #Select A Model
 st.subheader("Select a Type of Model to Project")
 position=st.selectbox("Hitter or Pitcher?",("Hitter","Pitcher"))
-conf=st.selectbox("Power 5 Conference?",("Yes","No"))
+conf=st.selectbox("Level of Baseball?",("Power 5 Conference","Non Power 5 Conference","High School/JUCO"))
 
 #Pitcher P5
-if position == "Pitcher" and conf == "Yes":
+if position == "Pitcher" and conf == "Power 5 Conference":
     st.subheader("Input Pitcher Statistics")
     era=st.number_input("ERA:",value=0.0)
     IP=st.number_input("Innings Pitcher:",value=0.0)
@@ -26,8 +26,10 @@ if position == "Pitcher" and conf == "Yes":
     SOw=st.number_input("Strikeout to Walk Ratio:",value=0.0)
     predictedp5=(-13.35499+(-.69823*era)+(.06487*IP)+(5.89958*WHIP)+(-1.46797*HR9)+(-1.11435*BB9)+(.80572*SO9)+(.34855*SOw))
     st.metric("Predicted War:",predictedp5)
+    mlbready = (6.71532 + (.12468 * era) + (-.01610 * IP) + (-1.93953 * WHIP) + (1.17481 * HR9) + (.90382 * BB9) + (-.47395 * SO9) + (.38684 * SOw))
+    st.metric("Predicted Time to Reach MLB:", f"{mlbready:.2f} years")
 #Pitcher N5
-if position == "Pitcher" and conf == "No":
+if position == "Pitcher" and conf == "Non Power 5 Conference":
     st.subheader("Input Pitcher Statistics")
     xera=st.number_input("ERA:",value=0.0)
     xIP=st.number_input("Innings Pitcher:",value=0.0)
@@ -38,8 +40,26 @@ if position == "Pitcher" and conf == "No":
     xSOw=st.number_input("Strikeout to Walk Ratio:",value=0.0)
     xpredictedp5=(3.3099 +(-.52151*xera)+(-.01845*xIP)+(1.12144*xWHIP)+(-1.31908*xHR9)+(-.48485*xBB9)+(-.08020*xSO9)+(.18308*xSOw))
     st.metric("Predicted War:",xpredictedp5)
+    xmlbready = (1.191447 + (.311831 * xera) + (.005943 * xIP) + (.511360 * xWHIP) + (-.544042 * xHR9) + (-.087242 * xBB9) + (.014701 * xSO9) + (.067421 * xSOw))
+    st.metric("Predicted Time to Reach MLB:", f"{xmlbready:.2f} years")
+
+#Juco/HS Pitcher
+if position == "Pitcher" and conf == "High School/JUCO":
+    st.subheader("Input Pitcher Statistics")
+    yera=st.number_input("ERA:",value=0.0)
+    yIP=st.number_input("Innings Pitcher:",value=0.0)
+    yWHIP=st.number_input("WHIP:",value=0.0)
+    yHR9=st.number_input("HR/9:",value=0.0)
+    yBB9=st.number_input("BB/9:",value=0.0)
+    ySO9=st.number_input("SO9:",value=0.0)
+    ySOw=st.number_input("Strikeout to Walk Ratio:",value=0.0)
+    ytoA=st.number_input("Years to Single A:",value=0.0)
+    ypredictedp5=(-3.53637 +(-.56064*yera)+(0.02223*yIP)+(1.42353*yWHIP)+(-.36428*yHR9)+(-.10288*yBB9)+(-.38674*ySO9)+(.25250*ySOw)+(-.31812*ytoA))
+    st.metric("Predicted War:",ypredictedp5)
+    ymlbready=(5.518778 +(-.007632*yera)+(-.008507*yIP)+(.838669*yWHIP)+(-.091802*yHR9)+(-.105406*yBB9)+(-.139258*ySO9)+(-.090533*ySOw)+(.693129*ytoA))
+    st.metric("Predicted Time to Reach MLB:", f"{ymlbready:.2f} years")
 #Hitter P5
-if position == "Hitter" and conf == "Yes":
+if position == "Hitter" and conf == "Power 5 Conference":
     st.subheader("Input Hitter Statistics")
     runs=st.number_input("Runs:",value=0)
     sb=st.number_input("SB:",value=0)
@@ -50,9 +70,11 @@ if position == "Hitter" and conf == "Yes":
     OPS=st.number_input("OPS:",value=0.0)
     predhitter5=(7.074771 +(-.007111*runs)+(.268339*sb)+(.448599*XBH)+(56.124926*HRrate)+(-28.110378*SORate)+(45.000647*WalkRate)+(-23.916247*OPS))
     st.metric("Predicted War:", predhitter5)
+    predmlb = (10.274933 + (.011031 * runs) + (-.053789 * sb) + (.003092 * XBH) + (15.463913 * HRrate) + (-5.512848 * SORate) + (-9.531319 * WalkRate) + (-5.311478 * OPS))
+    st.metric("Predicted Time to Reach MLB:", f"{predmlb:.2f} years")
 
 #Hitter Non p5
-if position == "Hitter" and conf == "No":
+if position == "Hitter" and conf == "Non Power 5 Conference":
     st.subheader("Input Hitter Statistics")
     xruns=st.number_input("Runs:",value=0)
     xsb=st.number_input("SB:",value=0)
@@ -63,3 +85,21 @@ if position == "Hitter" and conf == "No":
     xOPS=st.number_input("OPS:",value=0.0)
     xpredhitter5=(-18.66240 +(-.11467*xruns)+(.05062*xsb)+(.09609*xXBH)+(-65.01413*xHRrate)+(-.10683*xSORate)+(112.94747*xWalkRate)+(12.34521*xOPS))
     st.metric("Predicted War:", xpredhitter5)
+    xpredmlb = (10.274933 + (.011031*xruns)+(-.053789 * xsb) + (.003092 * xXBH) + (15.463913 * xHRrate) + (-5.512848 * xSORate) + (-9.531319 * xWalkRate) + (-5.311478 * xOPS))
+    st.metric("Predicted Time to Reach MLB:", f"{xpredmlb:.2f} years")
+
+#HS Hitter
+if position == "Hitter" and conf == "High School/JUCO":
+    st.subheader("Input Hitter Statistics")
+    yruns=st.number_input("Runs:",value=0)
+    ysb=st.number_input("SB:",value=0)
+    yXBH=st.number_input("Total Extra Base Hits:",value=0)
+    yHRrate=st.number_input("Home Run Rate:",value=0.0)
+    ySORate=st.number_input("Strikeout Rate:",value=0.0)
+    yWalkRate=st.number_input("Walk Rate:",value=0.0)
+    yOPS=st.number_input("OPS:",value=0.0)
+    yxtoa=st.number_input("Years to Single A:",value=0.0)
+    ypredhitter5=(-9.965928 +(.019165*yruns)+(.042159*ysb)+(.009875*yXBH)+(-81.652452*yHRrate)+(-13.091434*ySORate)+(38.530004*yWalkRate)+(14.002029*yOPS)+(-1.012992*yxtoa))
+    st.metric("Predicted War:", ypredhitter5)
+    ypredmlb= (6.914882 +(.003736*ysb)+(.001657*yXBH)+(-6.226212*yHRrate)+(3.430989*ySORate)+(.604821*yWalkRate)+(-4.813329*yOPS)+(.661929*yxtoa))
+    st.metric("Predicted Time to Reach MLB:",f"{ypredmlb:.2f} years")
