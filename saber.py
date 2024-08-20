@@ -7,8 +7,13 @@ st.set_page_config(
     page_title="Saberseminar Project Model Application",
     layout="wide",
     page_icon=":baseball:")
-st.title("Saberseminar Project Model Application")
-
+#st.title("Saberseminar Project Model Application")
+st.markdown(
+    """
+    <h1 style='text-align: center;'>Saberseminar Project Model Application</h1>
+    """,
+    unsafe_allow_html=True
+)
 #Select A Model
 st.subheader("Select a Type of Model to Project")
 position=st.selectbox("Hitter or Pitcher?",("Hitter","Pitcher"))
@@ -18,7 +23,7 @@ conf=st.selectbox("Level of Baseball?",("Power 5 Conference","Non Power 5 Confer
 if position == "Pitcher" and conf == "Power 5 Conference":
     st.subheader("Input Pitcher Statistics")
     era=st.number_input("ERA:",value=0.0)
-    IP=st.number_input("Innings Pitcher:",value=0.0)
+    IP=st.number_input("Innings Pitched:",value=0.0)
     WHIP=st.number_input("WHIP:",value=0.0)
     HR9=st.number_input("HR/9:",value=0.0)
     BB9=st.number_input("BB/9:",value=0.0)
